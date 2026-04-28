@@ -1,7 +1,8 @@
 <html>
-
 <head>
   <title>Soccer at Night</title>
+
+  <!-- Scripts (order kept the same, just cleaner) -->
   <script src="https://aframe.io/releases/1.0.3/aframe.min.js"></script>
   <script src="//unpkg.com/aframe-extras@4.1.2/dist/aframe-extras.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
@@ -9,228 +10,124 @@
 </head>
 
 <body>
+<a-scene physics="iterations: 10; gravity: -20; restitution: 0.9" light="defaultLightsEnabled: false">
 
-  <a-scene physics="iterations: 1; gravity: -10; restitution: 0.9; debug: true" light="defaultLightsEnabled: false">
-    <a-light 
-    type="ambient" 
-    intensity="0.3">
-  </a-light>
-    <a-light 
-    type="directional" 
-    position="0 100 500" 
-    intensity="0.5">
-  </a-light>
-  <a-light 
-    type="point" 
-    position="0 100 -500" 
-    intensity="0.2">
-  </a-light>
-      
+  <!-- LIGHTING -->
+  <a-light type="ambient" intensity="0.3"></a-light>
+  <a-light type="directional" position="0 100 500" intensity="0.5"></a-light>
+  <a-light type="point" position="0 100 -500" intensity="0.2"></a-light>
 
-  <a-sphere  
-  radius="0.0001"
-  color="blue" 
-  visible="true" 
-  movement2="canFly: false"  
-  position="0 0.5 -20">
-  <a-gltf-model 
-    src="low-poly_truck_car_drifter/scene.gltf"   
-    scale=".005 .005 .005" 
-    rotation="0 90 0" >
+  <!-- AI CAR -->
+  <a-sphere radius="0.0001" color="blue" movement2="canFly: false" position="0 0.5 -20">
+    <a-gltf-model src="low-poly_truck_car_drifter/scene.gltf" scale=".005 .005 .005" rotation="0 90 0">
 
-    <a-light
-    rotation="0 -90 0"
-    type="spot"
-    color="red"
-    intensity="50"
-    angle="30"
-    distance="200"
-    penumbra="0.5">
-  </a-light>
-  <a-box
-    position="0 0 0" 
-    width="3" 
-    height="2.3" 
-    depth="1.7" 
-    static-body 
-    visible="true">
+      <a-light
+        rotation="0 -90 0"
+        type="spot"
+        color="red"
+        intensity="50"
+        angle="30"
+        distance="200"
+        penumbra="0.5">
+      </a-light>
 
-  </a-box>
+      <a-box width="3" height="2.3" depth="1.7" static-body></a-box>
+
     </a-gltf-model>
-    </a-sphere>
-    <a-entity 
-    pause
-    ultimate
-    id="player" 
-    car-controls
-    position="0 .5 10">
-    <a-gltf-model 
-    src="low-poly_truck_car_drifter/scene.gltf"   
-    scale=".005 .005 .005" 
-    rotation="0 90 0" 
-    >
+  </a-sphere>
 
-    <a-light
-    rotation="0 -90 0"
-    type="spot"
-    color="white"
-    intensity="30"
-    angle="30"
-    distance="200"
-    penumbra="0.5"
-    visible="true"
-    id="headLight"
-    headlight>
-  </a-light>
-   <a-light
-    id="displayLight"
-    type="point" 
-    position="0 200 0" 
-    color="blue"
-    intensity="1">
-  </a-light>
-    <a-box
-    position="0 0 0" 
-    width="3" 
-    height="2.5" 
-    depth="1.7" 
-    static-body 
-    visible="true">
+  <!-- PLAYER -->
+  <a-entity id="player" position="0 .5 10" pause ultimate car-controls>
+    <a-gltf-model src="low-poly_truck_car_drifter/scene.gltf" scale=".005 .005 .005" rotation="0 90 0">
+
+      <!-- HEADLIGHT -->
+      <a-light
+        id="headLight"
+        headlight
+        rotation="0 -90 0"
+        type="spot"
+        color="white"
+        intensity="30"
+        angle="30"
+        distance="200"
+        penumbra="0.5">
+      </a-light>
+
+      <!-- ULT DISPLAY LIGHT -->
+      <a-light
+        id="displayLight"
+        type="point"
+        position="0 200 0"
+        color="blue"
+        intensity="1">
+      </a-light>
+
+      <a-box width="3" height="2.5" depth="1.7" static-body></a-box>
     </a-gltf-model>
-    <a-entity 
-    
-    id = "camera"
-    look-controls>
-  <a-entity
-    camera
-    
-    position="0 10 6"
-    rotation="-45 0 0">
-    <a-entity 
-    position="0 -0.5 -1"
-    id="pauseScreen"
-    visible="false"
-    text="value: WASD to move, Space to jump, P to pause, L for headlights, Q/E to ultimate. Increase ult charge by scoring, hitting the ball, or the ball moving quickly.; color: white; align: center">
-    </a-entity>
-    <a-entity 
-    position="-1 -0.75 -1"
-    id="chargeScreen"
-    visible="true"
-    text="value: Charge: 0; color: white; align: center">
-    </a-entity>
-    
+
+    <!-- CAMERA -->
+    <a-entity id="camera" look-controls>
+      <a-entity camera position="0 10 6" rotation="-45 0 0">
+
+        <a-entity
+          id="pauseScreen"
+          position="0 -0.5 -1"
+          visible="false"
+          text="value: WASD to move, Space to jump, P to pause, L for headlights, Q/E to ultimate. Increase ult charge by scoring, hitting the ball, or the ball moving quickly.; align: center">
+        </a-entity>
+
+        <a-entity
+          id="chargeScreen"
+          position="-1 -0.75 -1"
+          text="value: Charge: 0; align: center">
+        </a-entity>
+
+      </a-entity>
     </a-entity>
   </a-entity>
-    </a-entity>
-</a-entity>
-    <a-sky 
-    src="galaxy.jpg">
-  </a-sky>
-  <a-sphere 
-  id="ball" 
-  radius="1"
-  color="blue"
-  visible="true"
-  opacity="1"
-  scale="4 4 4"
-  position="0 5 0"
-  ballslow
-  dynamic-body="shape: sphere; friction: 100.0">
-    <a-gltf-model  
-    src="soccer_ball/scene.gltf" 
-    scale="1 1 1" 
-    position="0 0 0" 
-    >
-  </a-sphere>
-  </a-gltf-model>
-    <a-gltf-model 
-    src="soccer_field/scene.gltf" scale="4 4 4"></a-gltf-model>
-    <a-gltf-model 
-    src="soccer_field/scoreboard/scene.gltf" 
-    scale="1 1 1" 
-    rotation="0 90 0" 
-    position="-60 0 0">
-    <a-entity
-    id="scoreboard"
-    position="0 8.3 .73"
-    text="value: 0          8:30           0; color: white; align: center; width: 20">
-    </a-entity> 
-    </a-gltf-model>
-    <a-box position="0 0 0" 
-    width="10000" 
-    height=".01" 
-    depth="10000" 
-    static-body 
-    visible="false">
-  </a-box>
-    <a-box 
-    color="green" 
-    position="0 -.1 0" 
-    width="10000" 
-    height=".01" 
-    depth="10000" 
-    visible="true">
-  </a-box>
-    <a-box 
-    color="green" 
-    position="0 1 -88" 
-    width="16" 
-    height="12" 
-    depth="2" 
-    visible="false" 
-    static-body 
-    goal 
-    id="goal-left">
-  </a-box>
-    <a-box 
-    color="green" 
-    position="0 1 88" 
-    width="16" 
-    height="12" 
-    depth="2" 
-    visible="false" 
-    static-body 
-    goal 
-    id="goal-right">
-  </a-box>
-    <a-box 
-    color="green" 
-    position="0 1 100" 
-    width="9000" 
-    height="9000" 
-    depth="5" 
-    visible="false" 
-    static-body>
-  </a-box>
-    <a-box 
-    color="green" 
-    position="0 1 -100" 
-    width="9000" 
-    height="9000" 
-    depth="5" 
-    visible="false" 
-    static-body>
-  </a-box>
-    <a-box 
-    color="green" 
-    position="80 1 0" 
-    width="5" 
-    height="9000" 
-    depth="9000" 
-    visible="false" 
-    static-body>
-  </a-box>
-    <a-box 
-    color="green" 
-    position="-80 1 0" 
-    width="5" 
-    height="9000" 
-    depth="9000" 
-    visible="false" 
-    static-body>
-  </a-box>
-  </a-scene>
-  
-</body>
 
+  <!-- SKY -->
+  <a-sky src="galaxy.jpg"></a-sky>
+
+  <!-- BALL (FIXED NESTING) -->
+  <a-sphere
+    id="ball"
+    radius="1"
+    scale="4 4 4"
+    position="0 5 0"
+    ballslow
+    dynamic-body="shape: sphere; friction: 100">
+
+    <a-gltf-model src="soccer_ball/scene.gltf"></a-gltf-model>
+
+  </a-sphere>
+
+  <!-- FIELD -->
+  <a-gltf-model src="soccer_field/scene.gltf" scale="4 4 4"></a-gltf-model>
+
+  <!-- SCOREBOARD -->
+  <a-gltf-model src="soccer_field/scoreboard/scene.gltf" scale="1 1 1" rotation="0 90 0" position="-60 0 0">
+    <a-entity
+      id="scoreboard"
+      position="0 8.3 .73"
+      text="value: 0          8:30           0; align: center; width: 20">
+    </a-entity>
+  </a-gltf-model>
+
+  <!-- FLOOR -->
+  <a-box width="10000" height=".01" depth="10000" static-body visible="false"></a-box>
+  <a-box color="green" position="0 -.1 0" width="10000" height=".01" depth="10000"></a-box>
+
+  <!-- GOALS -->
+  <a-box id="goal-left" position="0 1 -88" width="16" height="12" depth="2" static-body goal visible="false"></a-box>
+  <a-box id="goal-right" position="0 1 88" width="16" height="12" depth="2" static-body goal visible="false"></a-box>
+
+  <!-- WALLS -->
+  <a-box position="0 1 100" width="9000" height="9000" depth="5" static-body visible="false"></a-box>
+  <a-box position="0 1 -100" width="9000" height="9000" depth="5" static-body visible="false"></a-box>
+  <a-box position="80 1 0" width="5" height="9000" depth="9000" static-body visible="false"></a-box>
+  <a-box position="-80 1 0" width="5" height="9000" depth="9000" static-body visible="false"></a-box>
+
+</a-scene>
+</body>
 </html>
