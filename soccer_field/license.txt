@@ -1,0 +1,11 @@
+Model Information:
+* title:	Soccer Field
+* source:	https://sketchfab.com/3d-models/soccer-field-4648dead5e1f4c97bcef826e40e6cfbe
+* author:	Tiko (https://sketchfab.com/tikoavp)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Soccer Field" (https://sketchfab.com/3d-models/soccer-field-4648dead5e1f4c97bcef826e40e6cfbe) by Tiko (https://sketchfab.com/tikoavp) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
